@@ -15,13 +15,10 @@ echo "CREATE EXTENSION pg_trgm;" | dokku postgres:connect gitlab
 # dokku postgres:connect gitlab < gitlab.backup.sql
 dokku redis:create gitlab
 dokku redis:link gitlab gitlab
-dokku config:set \
-	GITLAB_SECRETS_OTP_KEY_BASE="$(pwgen -s -n 64 -c 1)" \
-	GITLAB_SECRETS_DB_KEY_BASE="$(pwgen -s -n 64 -c 1)" \
-	GITLAB_SECRETS_SECRET_KEY_BASE="$(pwgen -s -n 64 -c 1)"
-dokku config:set $(cat dokku.env)
-dokku storage:mount /srv/gitlab/data:/home/git/data
-dokku storage:mount /srv/gitlab/log:/var/log/gitlab
+dokku config:set gitlab GITLAB_SECRETS_OTP_KEY_BASE="$(pwgen -s -n 64 -c 1)" GITLAB_SECRETS_DB_KEY_BASE="$(pwgen -s -n 64 -c 1)" GITLAB_SECRETS_SECRET_KEY_BASE="$(pwgen -s -n 64 -c 1)" GITLAB_SSH_PORT="4444" USERMAP_UID=998 USERMAP_GID=998 DB_ADAPTER=postgresql DB_HOST=10.11.12.13 DB_NAME=gitlabhq_production DB_USER=gitlab DB_PASS=password DATABASE_URL=postgres://gitlab:password@10.11.12.13:5432/ gitlabhq_production GITLAB_HOST="gitlab.dokku.me" GITLAB_TRUSTED_PROXIES="127.0.0.1" GITLAB_EMAIL="git@gitlab.dokku.me" GITLAB_SIGNUP_ENABLED="false" REDIS_HOST=dokku-redis-gitlab REDIS_PORT=6379
+dokku config:set gitlab $(cat dokku.env)
+dokku storage:mount gitlab /srv/gitlab/data:/home/git/data
+dokku storage:mount gitlab /srv/gitlab/log:/var/log/gitlab
 git push dokku master
 ```
 
