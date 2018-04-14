@@ -6,12 +6,12 @@ ENV USERMAP_UID=998 \
 		GITLAB_TRUSTED_PROXIES="127.0.0.1" \
 		GITLAB_EMAIL="git@gitlab.dokku.me" \
 		GITLAB_SIGNUP_ENABLED="false" \
-		GITLAB_SSH_PORT="4444"
-		DB_ADAPTER=postgresql
-		DB_NAME=gitlabhq_production
-		DB_USER=gitlab
+		GITLAB_SSH_PORT="4444" \
+		DB_ADAPTER=postgresql \
+		DB_NAME=gitlabhq_production \
+		DB_USER=gitlab \
 		DB_PASS=66a5d4a1cda26444729645d883b238a4
-		
+
 
 EXPOSE 80
 ENTRYPOINT ["/sbin/dokku-entrypoint.sh"]
