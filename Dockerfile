@@ -6,7 +6,7 @@ ENV USERMAP_UID=998 \
 		GITLAB_TRUSTED_PROXIES="127.0.0.1" \
 		GITLAB_EMAIL="git@gitlab.dokku.me" \
 		GITLAB_SIGNUP_ENABLED="false" \
-		GITLAB_SSH_PORT="4444" \
+		GITLAB_SSH_PORT="4444"
 
 EXPOSE 80
 ENTRYPOINT ["/sbin/dokku-entrypoint.sh"]
